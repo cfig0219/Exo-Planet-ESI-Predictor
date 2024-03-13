@@ -1,0 +1,405 @@
+NASA Earth Similarity Index:
+- Fe, Re = Earth solar flux and radius
+- ESI(F, R) = 1 - sqrt( 1/n * [ ((F-Fe)/(F+Fe))^2 + ((R-Re)/(R+Re))^2 ] )
+
+Example: Teegarden's Star b
+- ESI(1.15, 1.02) = 1 - sqrt( 1/2 * [ ((1.15-1)/(1.15+1))^2 + ((1.02-1)/(1.02+1))^2 ] )
+	= 1 - sqrt( 1/2 * [ ((0.15)/(2.15))^2 + ((0.02)/(2.02))^2 ] )
+	= 1 - sqrt( 1/2 * [ (0.06977)^2 + (0.009901)^2 ] )
+	= 1 - sqrt( 1/2 * (0.0048678 + 0.00009803) )
+	= 1 - sqrt( 1/2 * 0.0049658 )
+	= 1 - sqrt(0.0024829)
+	= 1 - 0.049829
+	ESI = 0.9502
+
+
+Weighted NASA ESI Equation:
+- Fe, Re, De, Ee, Te = Earth flux, radius, density, escape velocity, and temperature
+- Weights of values: radius(0.57), density(1.07), escape(0.70), temperature(5.58)
+- Earth Temperature: 288 Kelvin
+
+- Planet density = mass/volume = M / (4/3 * 22/7 * R^3) = 
+	MV result = 0.2386 = 1 / 0.2386 = 4.1905
+	ED Constant = 4.1905
+	De = 5.51 kg/m^3
+	Density = De * [ ED * (M / (4/3 * 22/7 * R^3)) ]
+
+- Escape velocity = sqrt( (2 * M) / R ) = 
+	V result = 1.4142 = 1 / 1.4142 = 0.7072
+	EV Constant = 0.7072
+	Ee = 11.186 km/s
+	Escape = Ee * [ EV * sqrt( (2 * M) / R ) ]
+
+- ESI(F, R, D, E, T) = 1 - sqrt( 1/n * [ ((F-Fe)/(F+Fe))^2 + 
+				(0.57) * ((R-Re)/(R+Re))^2 +
+				(1.07) * ((D-De)/(D+De))^2 +
+				(0.70) * ((E-Ee)/(E+Ee))^2 +
+				(5.58) * ((T-Te)/(T+Te))^2 ] )
+
+Example: Teegarden's Star b
+- Planet Density = 5.51 * [ 4.1905 * (1.05 / (4/3 * 22/7 * 1.02^3)) ]
+	= 5.51 * [ 4.1905 * (1.05 / (4.44697)) ]
+	= 5.51 * ( 4.1905 * 0.23612 )
+	Density = 5.45 kg/m3
+
+
+- Escape Velocity = 11.186 * [ 0.7072 * sqrt( (2 * 1.05) / 1.02 ) ]
+	= 11.186 * [ 0.7072 * sqrt( 2.1 / 1.02 ) ]
+	= 11.186 * ( 0.7072 * 1.43486 )
+	Escape = 11.351 km/s
+
+- ESI(1.15, 1.02, 5.45, 11.351, 298) = 1 - sqrt( 1/5 * [ ((1.15-1)/(1.15+1))^2 + 
+							(0.57) * ((1.02-1)/(1.02+1))^2 +
+							(1.07) * ((5.45-5.51)/(5.45+5.51))^2 +
+							(0.70) * ((11.351-11.186)/(11.351+11.186))^2 +
+							(5.58) * ((298-288)/(298+288))^2 ] )
+	= 1 - sqrt( 1/5 * [ ((0.15)/(2.15))^2 + (0.57) * ((0.02)/(2.02))^2 + 
+							(1.07) * ((-0.06)/(10.96))^2 +
+							(0.70) * ((0.165)/(22.537))^2 +
+							(5.58) * ((10)/(586))^2 ] )
+	= 1 - sqrt( 1/5 * [ (0.069767)^2 + (0.57)*(0.009901)^2 + (1.07)*(-0.005474)^2 +
+							(0.70)*(0.0073213)^2 +
+							(5.58)*(0.017065)^2 ] )
+	= 1 - sqrt( 1/5 * [ 0.0048674 + (0.57)*(0.00009803) + (1.07)*(0.00002996) + (0.70)*(0.0000536) +
+							(5.58)*(0.00029121) ] )
+	= 1 - sqrt( 1/5 * (0.0048674 + 0.00005588 + 0.00003206 + 0.00003752 + 0.001625) )
+	= 1 - sqrt( 1/5 * (0.0066179) )
+	= 1 - 0.03638
+	ESI = 0.9636
+
+
+Custom ESI Equation: Not Weighted
+- Star Flux = Fe = 1 earth
+- Radius = Re = 1 earth
+- Gravity = Ge = 9.82 m/s^2
+- Planet Mass = Me = 1 earth
+- Temperature = Te = 288 K
+- Star Temperature = Ke = 5778 K
+- Star Mass = Se = 1 sol
+- Orbital Period = Oe = 365 days
+- Density = De = 5.51
+
+Planet Gravity: M / [ (R)^2 ]
+- M = Earth masses
+- R = Earth radii
+- Ge = 9.82 m/s^2
+- Gravity = Ge * [ M / (R^2) ]
+
+ESI(F, R, G, M, T, K, S, O, D) = 1 - sqrt( 1/n * [ ((F-Fe)/(F+Fe))^2 + 
+						((R-Re)/(R+Re))^2 +
+						((G-Ge)/(G+Ge))^2 +
+						((M-Me)/(M+Me))^2 +
+						((T-Te)/(T+Te))^2 +
+						((K-Ke)/(K+Ke))^2 +
+						((S-Se)/(S+Se))^2 +
+						((O-Oe)/(O+Oe))^2 +
+						((D-De)/(D+De))^2 ] )
+
+Example: Teegarden's Star b
+- ESI(1.15, 1.02, 9.91, 1.05, 298, 2637, 0.093, 4.9, 5.51) = 
+				1 - sqrt( 1/9 * [ ((1.15-1)/(1.15+1))^2 + 
+						((1.02-1)/(1.02+1))^2 +
+						((9.91-9.82)/(9.91+9.82))^2 +
+						((1.05-1)/(1.05+1))^2 +
+						((298-288)/(298+288))^2 +
+						((2637-5778)/(2637+5778))^2 +
+						((0.093-1)/(0.093+1))^2 +
+						((4.9-365)/(4.9+365))^2 +
+						((5.45-5.51)/(5.45+5.51))^2 ] )
+	= 1 - sqrt( 1/9 * [ ((0.15)/(2.15))^2 + ((0.02)/(2.02))^2 + ((0.09)/(19.73))^2 +
+						((0.05)/(2.05))^2 + ((10)/(586))^2 +
+						((-3141)/(8415))^2 + ((-0.907)/(1.093))^2 +
+						((-360.1)/(369.9))^2 + ((-0.06)/(10.96))^2 ] )
+	= 1 - sqrt( 1/9 * [ (0.069767)^2 + (0.009901)^2 + (0.0045616)^2 + (0.02439)^2 + 
+						(0.017065)^2 + (-0.37326)^2 + (-0.82983)^2 +
+						(-0.97351)^2 + (-0.005474)^2 ] )
+	= 1 - sqrt( 1/9 * (0.0048674 + 0.00009803 + 0.00002081 + 0.00059487 + 0.00029121 + 
+						0.13932 + 0.68882 + 0.94772 + 0.00002997 ] )
+	= 1 - sqrt(1/9 * 1.78176)
+	= 1 - sqrt(0.19797)
+	= 1 - 0.4449
+	ESI = 0.5551
+
+
+Revised ESI Equation: Weighted
+- Star Flux = Fe = 1 earth
+- Radius = Re = 1 earth
+- Gravity = Ge = 9.82 m/s^2
+- Planet Mass = Me = 1 earth
+- Temperature = Te = 288 K
+- Star Temperature = Ke = 5778 K
+- Star Mass = Se = 1 sol
+- Orbital Period = Oe = 365 days
+- Density = De = 5.51
+
+* Venus yielded a higher than expected ESI with the previous custom ESI
+  weights were addeded to make temperature a more prevalent feature
+- First ESI: 0.79
+- Second ESI: 0.51
+
+Weights:
+- Star Flux = 3.2
+- Radius = 0.57
+- Gravity = 4.75 (adjusted to not include planets with extreme gravity)
+- Planet Mass = 0.4
+- Temperature = 10.58 (adjusted to accomodate new list size)
+- Star Temperature = 
+- Star Mass = 
+- Orbital Period = 
+- Density = 2.8
+
+
+
+List of habitable planets: More data in excel sheet
+
+Name: 		      Stellar flux:	Radius:	    Planet Mass:     Temperature:     Density:     Escape velocity:	Gravity:      Star temperature:	     Star mass:       Orbital period:
+- Earth			  1		  1 		  1		 288		5.51		11.186		  9.82		   5778			1		  365
+- Mars
+- Venus
+- Jupiter
+- Kepler-1638 b
+- Kepler-440 b
+- GJ 433 d
+- Kepler-1653 b
+- GJ 832 c
+- Kepler-705 b
+- Kepler-296 e
+- Trappist-1 e
+- Kepler-442 b
+- K2-72 e
+- GJ 1061 d
+- GJ 1061 c
+- GJ 180 c
+- GJ 163 c
+- Kepler-1540 b
+- Kepler-174 d
+- Kepler-452 b
+- Kepler-62 e
+- Kepler-1652 b
+- Trappist-1 d
+- Proxima Centauri b
+- GJ 667 C f
+- Kepler-62 f
+- Trappist-1 f
+- GJ 3293 d
+- LHS 1140 b
+- GJ 229 A c
+- GJ 357 d
+- GJ 682 b
+- GJ 180 d
+- Wolf 1061 c
+- Kepler-1410 b
+- GJ 667 C c
+- Kepler-1544 b
+- Kepler-283 c
+- Kepler-22 b
+- Kepler-1701 b
+- K2-18 b
+- Kepler-1606 b
+- K2-9 b
+- K2-332 b
+- Kepler-155 c
+- TOI-2257 b
+- Kepler-443 b
+- Ross 128 b
+- GJ 273 b
+- Teegarden's Star b	  1.15	  	  1.02		   1.05		  298		5.45		11.351 		  9.91		   2637		        0.093		   4.9
+- TOI-700 d
+- Kepler-1649 c
+- HD 40307 g
+- Kepler-296 f
+- HIP 38594 b
+- K2-288 B b
+- HD 216520 c
+- Teegarden's Star c
+- Kepler-1229 b
+- Kepler-186 f
+- GJ 667 C e
+- Trappist-1 g
+
+
+Sources:
+https://exoplanets.nasa.gov/discovery/exoplanet-catalog/
+https://phl.upr.edu/projects/habitable-exoplanets-catalog
+https://phl.upr.edu/projects/earth-similarity-index-esi
+https://sciencing.com/measure-density-planet-5557152.html
+https://www.omnicalculator.com/physics/escape-velocity
+https://planetcalc.com/1758/
+
+
+The input for database:
+
+CREATE TABLE `alldata` (
+  `pname` varchar(20) NOT NULL,
+  `operiod` real DEFAULT NULL,
+  `radius` real DEFAULT NULL,
+  `pmass` real DEFAULT NULL,
+  `flux` real DEFAULT NULL,
+  `temp` real DEFAULT NULL,
+  `sttemp` real DEFAULT NULL,
+  `stmass` real DEFAULT NULL,
+  `density` real DEFAULT NULL,
+  `velocity` real DEFAULT NULL,
+  `gravity` real DEFAULT NULL,
+  `standard` real DEFAULT NULL,
+  `weighted` real DEFAULT NULL,
+  `custom` real DEFAULT NULL,
+  `revised` real DEFAULT NULL,
+  PRIMARY KEY (`pname`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+BULK INSERT alldata
+from 'All_Data.csv'
+with (firstrow = 2,
+      fieldterminator = ',',
+      rowterminator='\n',
+      batchsize=313,
+      maxerrors=10);
+
+
+CREATE TABLE `esistandard` (
+  `pname` varchar(20) NOT NULL,
+  `operiod` real DEFAULT NULL,
+  `radius` real DEFAULT NULL,
+  `pmass` real DEFAULT NULL,
+  `flux` real DEFAULT NULL,
+  `temp` real DEFAULT NULL,
+  `sttemp` real DEFAULT NULL,
+  `stmass` real DEFAULT NULL,
+  `density` real DEFAULT NULL,
+  `velocity` real DEFAULT NULL,
+  `gravity` real DEFAULT NULL,
+  `standard` real DEFAULT NULL,
+  PRIMARY KEY (`pname`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+BULK INSERT esistandard
+from 'Standard/Top_Standard.csv'
+with (firstrow = 2,
+      fieldterminator = ',',
+      rowterminator='\n',
+      batchsize=12,
+      maxerrors=10);
+
+
+CREATE TABLE `esiweighted` (
+  `pname` varchar(20) NOT NULL,
+  `operiod` real DEFAULT NULL,
+  `radius` real DEFAULT NULL,
+  `pmass` real DEFAULT NULL,
+  `flux` real DEFAULT NULL,
+  `temp` real DEFAULT NULL,
+  `sttemp` real DEFAULT NULL,
+  `stmass` real DEFAULT NULL,
+  `density` real DEFAULT NULL,
+  `velocity` real DEFAULT NULL,
+  `gravity` real DEFAULT NULL,
+  `weighted` real DEFAULT NULL,
+  PRIMARY KEY (`pname`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+BULK INSERT esistandard
+from 'Weighted/Top_Weighted.csv'
+with (firstrow = 2,
+      fieldterminator = ',',
+      rowterminator='\n',
+      batchsize=12,
+      maxerrors=10);
+
+
+CREATE TABLE `esicustom` (
+  `pname` varchar(20) NOT NULL,
+  `operiod` real DEFAULT NULL,
+  `radius` real DEFAULT NULL,
+  `pmass` real DEFAULT NULL,
+  `flux` real DEFAULT NULL,
+  `temp` real DEFAULT NULL,
+  `sttemp` real DEFAULT NULL,
+  `stmass` real DEFAULT NULL,
+  `density` real DEFAULT NULL,
+  `velocity` real DEFAULT NULL,
+  `gravity` real DEFAULT NULL,
+  `custom` real DEFAULT NULL,
+  PRIMARY KEY (`pname`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+BULK INSERT esistandard
+from 'Custom/Top_Custom.csv'
+with (firstrow = 2,
+      fieldterminator = ',',
+      rowterminator='\n',
+      batchsize=12,
+      maxerrors=10);
+
+
+CREATE TABLE `esirevised` (
+  `pname` varchar(20) NOT NULL,
+  `operiod` real DEFAULT NULL,
+  `radius` real DEFAULT NULL,
+  `pmass` real DEFAULT NULL,
+  `flux` real DEFAULT NULL,
+  `temp` real DEFAULT NULL,
+  `sttemp` real DEFAULT NULL,
+  `stmass` real DEFAULT NULL,
+  `density` real DEFAULT NULL,
+  `velocity` real DEFAULT NULL,
+  `gravity` real DEFAULT NULL,
+  `revised` real DEFAULT NULL,
+  PRIMARY KEY (`pname`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+BULK INSERT esirevised
+from 'Revised/Top_Revised.csv'
+with (firstrow = 2,
+      fieldterminator = ',',
+      rowterminator='\n',
+      batchsize=12,
+      maxerrors=10);
+
+
+SELECT Req_ID, (avg(R1)+avg(R2)+avg(R3)+avg(R4)+avg(R5))/5 as Average
+FROM Request
+Group by Req_ID;
+
+
+SELECT pname, (1-SQRT((1/2)*(POWER((flux-1)/(flux+1),2)+
+	      POWER((radius-1)/(radius+1),2))))
+              as esistandard
+FROM alldata
+Group by pname;
+
+SELECT pname, 1-SQRT((1/5)*(POWER((flux-1)/(flux+1),2)+
+	      (0.57*POWER((radius-1)/(radius+1),2))+
+	      (1.07*POWER((density-5.51)/(density+5.51),2))+
+	      (0.7*POWER((velocity-11.186)/(velocity+11.186),2))+
+	      (5.58*POWER((temp-288)/(temp+288),2))))
+              as esiweighted
+FROM alldata
+Group by pname;
+
+SELECT pname, 1-SQRT((1/9)*(POWER((flux-1)/(flux+1),2)+
+	      POWER((radius-1)/(radius+1),2)+
+	      POWER((gravity-9.82)/(gravity+9.82),2)+
+	      POWER((mass-1)/(mass+1),2)+
+	      POWER((temp-288)/(temp+288),2)+
+	      POWER((sttemp-5778)/(sttemp+5778),2)+
+	      POWER((stmass-1)/(stmass+1),2)+
+	      POWER((operiod-365)/(operiod+365),2)+
+	      POWER((density-5.51)/(density+5.51),2)))
+              as esicustom
+FROM alldata
+Group by pname;
+
+SELECT pname, 1-SQRT((1/9)*(3.2*(POWER((flux-1)/(flux+1),2))+
+	      (0.57*POWER((radius-1)/(radius+1),2))+
+	      (4.75*POWER((gravity-9.82)/(gravity+9.82),2))+
+	      (0.2*POWER((mass-1)/(mass+1),2))+
+	      (10.58*POWER((temp-288)/(temp+288),2))+
+	      POWER((sttemp-5778)/(sttemp+5778),2)+
+	      POWER((stmass-1)/(stmass+1),2)+
+	      POWER((operiod-365)/(operiod+365),2)+
+	      (2.8*POWER((density-5.51)/(density+5.51),2))))
+              as esirevised
+FROM alldata
+Group by pname;
+
